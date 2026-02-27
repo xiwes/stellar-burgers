@@ -1,3 +1,5 @@
+// src/components/app-header/app-header.tsx
+
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from '../ui/app-header/app-header.module.css';
@@ -9,6 +11,14 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 import { useSelector } from '../../services/store';
 
+const linkClassName = ({ isActive }: { isActive: boolean }) =>
+  `${styles.link} ${isActive ? styles.link_active : styles.link_inactive}`;
+
+const profileLinkClassName = ({ isActive }: { isActive: boolean }) =>
+  `${styles.link_position_last} ${styles.link} ${
+    isActive ? styles.link_active : styles.link_inactive
+  }`;
+
 export const AppHeader: FC = () => {
   const userName = useSelector((s) => s.user.user?.name);
 
@@ -16,7 +26,7 @@ export const AppHeader: FC = () => {
     <header className={styles.header}>
       <nav className={`${styles.menu} p-4`}>
         <div className={styles.menu_part_left}>
-          <NavLink to='/' end className={styles.link}>
+          <NavLink to='/' end className={linkClassName}>
             {({ isActive }) => (
               <>
                 <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
@@ -27,7 +37,7 @@ export const AppHeader: FC = () => {
             )}
           </NavLink>
 
-          <NavLink to='/feed' className={styles.link}>
+          <NavLink to='/feed' className={linkClassName}>
             {({ isActive }) => (
               <>
                 <ListIcon type={isActive ? 'primary' : 'secondary'} />
@@ -43,10 +53,7 @@ export const AppHeader: FC = () => {
           <Logo className='' />
         </div>
 
-        <NavLink
-          to='/profile'
-          className={`${styles.link_position_last} ${styles.link}`}
-        >
+        <NavLink to='/profile' className={profileLinkClassName}>
           {({ isActive }) => (
             <>
               <ProfileIcon type={isActive ? 'primary' : 'secondary'} />

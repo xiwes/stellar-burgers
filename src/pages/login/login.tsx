@@ -1,8 +1,13 @@
+// src/pages/login/login.tsx
 import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import { loginUser } from '../../services/slices/userSlice';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Location, useLocation, useNavigate } from 'react-router-dom';
+
+type TLocationState = {
+  from?: Location;
+};
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
@@ -16,9 +21,10 @@ export const Login: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password })).then((res) => {
-      if ((res as any).meta?.requestStatus === 'fulfilled') {
-        const from = (location.state as any)?.from?.pathname || '/';
+    dispatch(loginUser({ email, password })).then((action) => {
+      if (loginUser.fulfilled.match(action)) {
+        const state = location.state as TLocationState | null;
+        const from = state?.from?.pathname || '/';
         navigate(from, { replace: true });
       }
     });

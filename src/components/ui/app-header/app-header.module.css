@@ -35,3 +35,11 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.link_active {
+  color: #f2f2f3;
+}
+
+.link_inactive {
+  color: #8585ad;
+}
