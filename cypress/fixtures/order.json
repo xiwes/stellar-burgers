@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "name": "test order",
+  "order": {
+    "_id": "order_1",
+    "status": "done",
+    "name": "Burger",
+    "owner": {
+      "name": "Test User",
+      "email": "test@test.com",
+      "createdAt": "",
+      "updatedAt": ""
+    },
+    "createdAt": "",
+    "updatedAt": "",
+    "number": 12345,
+    "price": 180
+  }
+}
